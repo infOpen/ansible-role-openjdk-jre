@@ -1,5 +1,5 @@
-ntp
-===
+openjdk-jre
+===========
 
 [![Build Status](https://travis-ci.org/infOpen/ansible-role-openjdk-jre.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-openjdk-jre)
 
