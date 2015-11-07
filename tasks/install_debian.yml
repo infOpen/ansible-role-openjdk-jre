@@ -3,6 +3,7 @@
 # Debian install tasks
 
 - name : Install openjdk-jre (Debian)
+  become : True
   apt  :
     name             : "{{ item }}"
     state            : "{{ openjdk_jre_package_state }}"
