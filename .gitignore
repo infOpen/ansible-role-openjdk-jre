@@ -1,5 +1,19 @@
-# Ignore vagrant data
-.vagrant
-
-# Ignore swap files
+# Swap files
+*.swo
 *.swp
+
+# Python bytecode
+*.pyc
+
+# Pytest
+.cache
+
+# Vagrant
+.vagrant
+*.retry
+
+# Bundle
+.bundle
+
+# Tox testing
+.tox
