@@ -2,5 +2,5 @@
 
 # Debian specific vars
 
-openjdk_jre_packages :
+openjdk_jre_packages:
   - "openjdk-{{ openjdk_jre_version }}-jre"
