@@ -1,0 +1,3 @@
+openjdk-jre-docker-jessie ansible_connection=docker
+openjdk-jre-docker-trusty ansible_connection=docker
+openjdk-jre-docker-xenial ansible_connection=docker

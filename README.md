@@ -11,36 +11,33 @@ in the metadata file.
 
 ## Testing
 
-This role has two test methods :
+This role use [Molecule](https://github.com/metacloud/molecule/) to run tests.
 
-- localy with Vagrant or Docker:
-- automaticaly by Travis using docker
+Locally, you can run tests on Docker (default driver) or Vagrant.
+Travis run tests using Docker driver only.
 
-Tests should pass before Github push :)
-
-Role tests are done with Docker, Tox and testinfra in temporaly container
-- install [Docker](https://www.docker.com/)
-- install [Tox](https://pypi.python.org/pypi/tox) into a virtualenv
+Currently, tests are done on:
+- Debian Jessie
+- Ubuntu Trusty
+- Ubuntu Xenial
+and use:
+- Ansible 2.0.x
+- Ansible 2.1.x
+- Ansible 2.2.x
 
 ### Running tests
 
-#### Run playbook with Vagrant
+#### Using Docker driver
 
-- if Vagrant box not running
-    $ vagrant up
+```
+$ tox
+```
 
-- if Vagrant box running
-    $ vagrant provision
+#### Using Vagrant driver
 
-#### Run playbook and tests with Docker
-
-> **Warning**
-> You must have an SSH keys into common location (~/.ssh/id_rsa) or set path in
->  environment variables. They will used to connect to container by SSH for
-> Ansible deployment
-
-- make test-all (for test over all Ansible version)
-- or for only one version: TOXENV=py27-ansible20 make test-env
+```
+$ MOLECULE_DRIVER=vagrant tox
+```
 
 ## Role Variables
 
