@@ -1,0 +1,8 @@
+---
+
+# Debian OS family specific vars
+
+_openjdk_jre_version: 7
+_openjdk_jre_packages:
+  - name: "openjdk-{{ openjdk_jre_version }}-jre"
+    state: 'present'
