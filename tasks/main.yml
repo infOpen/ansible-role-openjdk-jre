@@ -2,11 +2,16 @@
 
 # Tasks file for openjdk-jre
 
-- name: 'Load the OS specific varibles'
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family | lower }}.yml"
-
-- include: 'install_debian.yml'
+- name: 'INIT | Manage variables to use for our target'
+  include: "{{ role_path }}/tasks/manage_variables.yml"
   tags:
-    - 'install'
-    - 'openjdk-jre'
-  when: "{{ ansible_os_family == 'Debian' }}"
+    - 'role::openjdk-jre'
+    - 'role::openjdk-jre::install'
+
+
+- name: 'INSTALL | Manage installation tasks for your OS family'
+  become: True
+  include: "{{ role_path }}/tasks/install_{{ ansible_os_family | lower }}.yml"
+  tags:
+    - 'role::openjdk-jre'
+    - 'role::openjdk-jre::install'

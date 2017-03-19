@@ -43,18 +43,15 @@ $ MOLECULE_DRIVER=vagrant tox
 
 Follow the possible variables with their default values
 
-    # Package variables
-    #------------------
-    openjdk_jre_package_state  : present
+```
+# Specific Debian family settings
+openjdk_jre_apt_update_cache: True
+openjdk_jre_apt_cache_valid_time: 3600
 
-    openjdk_jre_version : 7
-
-
-Specific OS family vars :
-
-    # Debian
-    openjdk_jre_packages :
-      - "openjdk-{{ openjdk_jre_version }}-jre"
+# General settings
+openjdk_jre_version: "{{ _openjdk_jre_version }}"
+openjdk_jre_packages: "{{ _openjdk_jre_packages }}"
+```
 
 ## Dependencies
 
@@ -62,9 +59,11 @@ None
 
 ## Example Playbook
 
-    - hosts: servers
-      roles:
-         - { role: infOpen.openjdk-jre }
+```
+- hosts: servers
+  roles:
+     - { role: infOpen.openjdk-jre }
+```
 
 ## License
 
