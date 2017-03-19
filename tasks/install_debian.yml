@@ -2,11 +2,10 @@
 
 # Debian install tasks
 
-- name: 'Install openjdk-jre (Debian)'
-  become: True
+- name: 'INSTALL | APT | Install openjdk-jre packages'
   apt:
-    name: "{{ item }}"
-    state: "{{ openjdk_jre_package_state }}"
-    update_cache: True
-    cache_valid_time: 3600
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    update_cache: "{{ openjdk_jre_apt_update_cache }}"
+    cache_valid_time: "{{ openjdk_jre_apt_cache_valid_time | default(omit) }}"
   with_items: "{{ openjdk_jre_packages }}"

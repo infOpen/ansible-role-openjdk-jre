@@ -1,0 +1,5 @@
+---
+
+# Specific Xenial vars
+
+_openjdk_jre_version: 9
