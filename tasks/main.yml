@@ -1,6 +1,6 @@
 ---
 
-# Tasks file for openjdk-jre
+# Main tasks file for openjdk-jre role
 
 - name: 'INIT | Manage variables to use for our target'
   include: "{{ role_path }}/tasks/manage_variables.yml"
