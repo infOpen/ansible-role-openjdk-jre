@@ -1,6 +1,6 @@
 ---
 
-# Defaults file for openjdk-jre
+# Defaults vars file for openjdk-jre role
 
 # Specific Debian family settings
 openjdk_jre_apt_update_cache: True

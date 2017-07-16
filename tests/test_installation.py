@@ -2,25 +2,30 @@
 Role tests
 """
 
+import pytest
+
 from testinfra.utils.ansible_runner import AnsibleRunner
 
 testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
 
 
-def test_repository_file(Package, SystemInfo):
+@pytest.mark.parametrize('name,codenames', [
+    ('python-apt-common', None),
+    ('python-apt', None),
+    ('openjdk-7-jre', ['jessie', 'trusty']),
+    ('openjdk-9-jre', ['xenial']),
+])
+def test_repository_file(host, name, codenames):
     """
-    Test community repository file permissions
+    Test packages installed
     """
 
-    jre_package_name = ''
+    if host.system_info.distribution not in ['debian', 'ubuntu']:
+        pytest.skip('{} ({}) distribution not managed'.format(
+            host.system_info.distribution, host.system_info.release))
 
-    if SystemInfo.distribution in ['debian', 'ubuntu']:
-        if SystemInfo.release == '16.04':
-            jre_package_name = 'openjdk-9-jre'
-        else:
-            jre_package_name = 'openjdk-7-jre'
+    if codenames and host.system_info.codename.lower() not in codenames:
+        pytest.skip('{} package not used with {} ({})'.format(
+            name, host.system_info.distribution, host.system_info.codename))
 
-    packages = ['python-apt-common', 'python-apt', jre_package_name]
-
-    for package in packages:
-        assert Package(package).is_installed is True
+    assert host.package(name).is_installed
