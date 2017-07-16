@@ -6,8 +6,8 @@ Install openjdk-jre package.
 
 ## Requirements
 
-This role requires Ansible 1.4 or higher, and platform requirements are listed
-in the metadata file.
+This role requires Ansible 2.0 or higher,
+and platform requirements are listed in the metadata file.
 
 ## Testing
 
@@ -20,10 +20,12 @@ Currently, tests are done on:
 - Debian Jessie
 - Ubuntu Trusty
 - Ubuntu Xenial
+
 and use:
 - Ansible 2.0.x
 - Ansible 2.1.x
 - Ansible 2.2.x
+- Ansible 2.3.x
 
 ### Running tests
 
@@ -41,9 +43,11 @@ $ MOLECULE_DRIVER=vagrant tox
 
 ## Role Variables
 
-Follow the possible variables with their default values
+### Default role variables
 
-```
+``` yaml
+# Defaults vars file for openjdk-jre role
+
 # Specific Debian family settings
 openjdk_jre_apt_update_cache: True
 openjdk_jre_apt_cache_valid_time: 3600
@@ -59,10 +63,10 @@ None
 
 ## Example Playbook
 
-```
+``` yaml
 - hosts: servers
   roles:
-     - { role: infOpen.openjdk-jre }
+    - { role: infOpen.openjdk-jre }
 ```
 
 ## License
