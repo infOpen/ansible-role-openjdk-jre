@@ -1,0 +1,10 @@
+---
+
+# Redhat family install tasks
+
+- name: 'INSTALL | YUM | Install openjdk-jre packages'
+  become: True
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ openjdk_jre_packages }}"
