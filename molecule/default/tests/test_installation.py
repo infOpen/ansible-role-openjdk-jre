@@ -12,22 +12,27 @@ testinfra_hosts = AnsibleRunner(
 
 
 @pytest.mark.parametrize('name,codenames', [
-    ('python-apt-common', None),
-    ('python-apt', None),
-    ('openjdk-7-jre', ['jessie', 'trusty']),
-    ('openjdk-9-jre', ['xenial']),
+    ('openjdk-8-jre', ['stretch']),
+    ('openjdk-11-jre', ['bionic', 'buster', 'focal']),
+    ('java-11-openjdk', ['7', '8']),
 ])
 def test_repository_file(host, name, codenames):
     """
     Test packages installed
     """
 
-    if host.system_info.distribution not in ['debian', 'ubuntu']:
+    if host.system_info.distribution not in ['centos', 'debian', 'ubuntu']:
         pytest.skip('{} ({}) distribution not managed'.format(
             host.system_info.distribution, host.system_info.release))
 
-    if codenames and host.system_info.codename.lower() not in codenames:
-        pytest.skip('{} package not used with {} ({})'.format(
-            name, host.system_info.distribution, host.system_info.codename))
+    if host.system_info.distribution in ['debian', 'ubuntu']:
+        if codenames and host.system_info.codename.lower() not in codenames:
+            pytest.skip('{} package not used with {} ({})'.format(
+                name, host.system_info.distribution, host.system_info.codename)
+            )
+    else:
+        if codenames and host.system_info.release.lower() not in codenames:
+            pytest.skip('{} package not used with {} ({})'.format(
+                name, host.system_info.distribution, host.system_info.release))
 
     assert host.package(name).is_installed
