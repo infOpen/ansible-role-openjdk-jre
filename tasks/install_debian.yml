@@ -1,8 +1,9 @@
 ---
 
-# Debian install tasks
+# Debian family install tasks
 
 - name: 'INSTALL | APT | Install openjdk-jre packages'
+  become: True
   apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
